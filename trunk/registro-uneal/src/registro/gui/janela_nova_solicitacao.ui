@@ -1,0 +1,364 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>JanelaNovaSolicitacao</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>JanelaNovaSolicitacao</cstring>
+    </property>
+    <property name="enabled">
+        <bool>true</bool>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>544</width>
+            <height>415</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Nova solicitação</string>
+    </property>
+    <property name="mouseTracking">
+        <bool>false</bool>
+    </property>
+    <property name="acceptDrops">
+        <bool>false</bool>
+    </property>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_nome</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>20</y>
+                <width>410</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_nome</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>20</y>
+                <width>68</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Nome</string>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>Ciências</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Ciências Biológicas</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Geografia</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>História</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Letras</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Matemática</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Pedagogia</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Química</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Outro</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>comboBox_curso</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>60</y>
+                <width>410</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_curso</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>60</y>
+                <width>68</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Curso</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_data</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>100</y>
+                <width>86</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Data</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>checkBox_certidao</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>140</y>
+                <width>210</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Certidão de conclusão de curso</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>checkBox_declaracao</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>160</y>
+                <width>210</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Declaração</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>checkBox_diploma</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>180</y>
+                <width>210</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Diploma</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>checkBox_historico</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>200</y>
+                <width>93</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Histórico</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_solicitacao</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>140</y>
+                <width>86</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Solicitação</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>checkBox_outros</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>220</y>
+                <width>250</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Outros (especificar nas observações)</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>checkBox_urgencia</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>250</y>
+                <width>410</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Marque aqui caso seja uma solicitação de urgência comprovada
+(especificar nas observações)</string>
+        </property>
+    </widget>
+    <widget class="QTextEdit">
+        <property name="name">
+            <cstring>textEdit_observacoes</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>300</y>
+                <width>410</width>
+                <height>70</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_observacoes</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>300</y>
+                <width>86</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Observações</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_salvar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>240</x>
+                <y>380</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Salvar</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_limpar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>340</x>
+                <y>380</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Limpar</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_cancelar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>440</x>
+                <y>380</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Cancelar</string>
+        </property>
+    </widget>
+    <widget class="QDateEdit">
+        <property name="name">
+            <cstring>dateEdit_data</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>110</x>
+                <y>100</y>
+                <width>100</width>
+                <height>22</height>
+            </rect>
+        </property>
+        <property name="date">
+            <date>
+                <year>2000</year>
+                <month>1</month>
+                <day>1</day>
+            </date>
+        </property>
+        <property name="autoAdvance">
+            <bool>true</bool>
+        </property>
+    </widget>
+</widget>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>
