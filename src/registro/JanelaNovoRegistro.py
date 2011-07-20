@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from qt import *
+from DAO.RegistroDAO import RegistroDAO
 
 LISTA_GRADUACAO = [u"Ciências",
                    u"Ciências Biológicas",
@@ -197,7 +198,10 @@ class JanelaNovoRegistro(QWidget):
     def salvar(self):
         dict = {}
         
-        # implementar aqui o numero de registro
+        dao = RegistroDAO()
+        print "Tamanho do resultado da consulta: %s" % len(dao.selectAll())
+        
+        dict['registro'] = len(dao.select()) + 1
         
         if self.radio_diploma.isChecked():
             dict['tipo'] = 1
@@ -217,6 +221,22 @@ class JanelaNovoRegistro(QWidget):
         dict['data_registro'] = str(data_registro.year()) + '-' + str(data_registro.month()) + '-' + str(data_registro.day())
         data_saida = self.dateEdit_data_saida.date()
         dict['data_saida'] = str(data_saida.year()) + '-' + str(data_saida.month()) + '-' + str(data_saida.day())
+        
+        if self.radio_status1.isChecked() or self.radio_status2.isChecked() or self.radio_status3.isChecked() or self.radio_status4.isChecked():
+            if self.radio_status1.isChecked():
+                dict['status'] = 1
+            elif self.radio_status2.isChecked():
+                dict['status'] = 2
+            elif self.radio_status3.isChecked():
+                dict['status'] = 3
+            else:
+                dict['status'] = 4
+        else:
+            return QMessageBox.warning(None, "Oops", u"Você esqueceu de marcar o status da solicitação de registro de diploma.")
+        
+        dict['observacoes'] = self.textEdit_observacoes.text()
+        
+        print dict
         
         QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.\n registro: %s \n saida: %s" % (dict['data_registro'], dict['data_saida']))
         
