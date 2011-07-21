@@ -1,7 +1,0 @@
-# Project members authenticate over HTTPS to allow committing changes.
-svn checkout https://registro-uneal.googlecode.com/svn/trunk/ registro-uneal --username alezyoliveiraxD@gmail.com
-
-# Non-members may check out a read-only working copy anonymously over HTTP.
-svn checkout http://registro-uneal.googlecode.com/svn/trunk/ registro-uneal-read-only 
-
-pass: CA6hb2jz3Cp5
