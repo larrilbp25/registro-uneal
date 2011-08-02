@@ -198,10 +198,9 @@ class JanelaNovoRegistro(QWidget):
     def salvar(self):
         dict = {}
         
-        dao = RegistroDAO()
-        print "Tamanho do resultado da consulta: %s" % len(dao.selectAll())
+        registro_dao = RegistroDAO()
         
-        dict['registro'] = len(dao.select()) + 1
+        dict['registro'] = len(registro_dao.selectAll()) + 1
         
         if self.radio_diploma.isChecked():
             dict['tipo'] = 1
@@ -213,7 +212,7 @@ class JanelaNovoRegistro(QWidget):
             return QMessageBox.warning(None, "Oops", u"Você esqueceu de marcar o tipo de registro (diploma ou certificado.")
 
         if len(self.lineEdit_nome.text()) != 0:
-            dict['nome'] = self.lineEdit_nome.text()
+            dict['nome'] = str(self.lineEdit_nome.text())
         else:
             return QMessageBox.warning(None, "Oops", u"Você esqueceu de digitar o nome do aluno.")
         
@@ -234,9 +233,9 @@ class JanelaNovoRegistro(QWidget):
         else:
             return QMessageBox.warning(None, "Oops", u"Você esqueceu de marcar o status da solicitação de registro de diploma.")
         
-        dict['observacoes'] = self.textEdit_observacoes.text()
+        dict['observacoes'] = str(self.textEdit_observacoes.text())
         
-        print dict
+        registro_dao.insert()
         
         QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.\n registro: %s \n saida: %s" % (dict['data_registro'], dict['data_saida']))
         
