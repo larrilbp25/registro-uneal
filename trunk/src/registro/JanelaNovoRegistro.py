@@ -235,9 +235,11 @@ class JanelaNovoRegistro(QWidget):
         
         dict['observacoes'] = str(self.textEdit_observacoes.text())
         
-        registro_dao.insert()
+        insert = registro_dao.insert(dict)
+        print insert
         
-        QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.\n registro: %s \n saida: %s" % (dict['data_registro'], dict['data_saida']))
+        QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.")
+        self.close()
         
     def update(self):
         print "JanelaNovoRegistro.salvar(): Not implemented yet"

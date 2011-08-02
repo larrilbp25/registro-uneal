@@ -29,16 +29,20 @@ class RegistroDAO:
         except:
             print 'a tabela ja foi criada'
                 
-    def insert(self, object):
+    def insert(self, objeto):
         try:
+            print "objeto: ", objeto
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = u'''insert into Registro values ( %d, %s, %s, %s, %s, %d, %s );''' % (
-                  object['tipo'], object['nome'], object['curso'], object['data_registro'], object['data_saida'], object['status'], object['observacoes'])
+            insert = u'''insert into Registro values ( %d, %d, %s, %s, %s, %s, %d, %s );''' % objeto['registro'], objeto['tipo'], objeto['nome'], objeto['curso'], objeto['data_registro'], objeto['data_saida'], objeto['status'], objeto['observacoes']
+            print "vou executar o Insert..."
             cursor.execute(insert)
+            print "insert executado, vou commitar"
             banco.commit()
+            print "commit!"
             return True
-        except:
+        except Exception, e:
+            print e
             return False
     
     def update(self, object):
@@ -79,11 +83,8 @@ class RegistroDAO:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             selectAll = u"select * from Registro"
-            print "vou fazer a consulta..."
             cursor.execute(selectAll)
-            print "consulta realizada"
             resultados = cursor.fetchall()
-            print "resultados: ", resultados
             return resultados
         except:
             return False
