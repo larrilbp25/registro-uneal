@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-import sqlite3
+import sqlite
 from qt import QMessageBox
 
 class RegistroDAO:
@@ -10,7 +10,7 @@ class RegistroDAO:
     
     def create(self):
         try:
-            banco = sqlite3.connect('database/banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             create = u'''create table Registro 
                     ( registro INTEGER,
@@ -28,11 +28,10 @@ class RegistroDAO:
             return True
         except:
             print 'a tabela ja foi criada'
-            pass
                 
     def insert(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             insert = u'''insert into Registro values ( %d, %s, %s, %s, %s, %d, %s );''' % (
                   object['tipo'], object['nome'], object['curso'], object['data_registro'], object['data_saida'], object['status'], object['observacoes'])
@@ -44,7 +43,7 @@ class RegistroDAO:
     
     def update(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             update = u'''update Registro set ( "tipo"=%d, "nome"=%s, "curso"=%s, "data_registro"=%s, "status"=%d, "observacoes"=%s ) where (registro = %d);''' % (
                   object['tipo'], object['nome'], object['curso'], object['data_registro'], object['data_saida'], object['status'], object['observacoes'], object['registro'])
@@ -56,7 +55,7 @@ class RegistroDAO:
     
     def delete(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             delete = u'''delete from Registro where ("registro" = %d);''' % object['registro']
             cursor.execute(delete)
@@ -66,7 +65,7 @@ class RegistroDAO:
         
     def select(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             select = u'''select * from Registro where ("registro" = %d);''' % object['registro']
             cursor.execute(select)
@@ -77,12 +76,14 @@ class RegistroDAO:
         
     def selectAll(self):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            selectAll = u"select * from Registro;"
-            resultados = cursor.execute(str(selectAll))
-#            cursor.fetchall()
-            banco.commit()
+            selectAll = u"select * from Registro"
+            print "vou fazer a consulta..."
+            cursor.execute(selectAll)
+            print "consulta realizada"
+            resultados = cursor.fetchall()
+            print "resultados: ", resultados
             return resultados
         except:
             return False
