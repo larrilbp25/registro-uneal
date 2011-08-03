@@ -200,7 +200,9 @@ class JanelaNovoRegistro(QWidget):
         
         registro_dao = RegistroDAO()
         
-        dict['registro'] = len(registro_dao.selectAll()) + 1
+        dict['id'] = len(registro_dao.selectAll()) + 1
+        
+        dict['registro'] = self.spinbox_registro.value()
         
         if self.radio_diploma.isChecked():
             dict['tipo'] = 1
@@ -236,7 +238,8 @@ class JanelaNovoRegistro(QWidget):
         dict['observacoes'] = str(self.textEdit_observacoes.text())
         
         insert = registro_dao.insert(dict)
-        print insert
+        if insert != True:
+            return QMessageBox.warning(None, "Erro", "O erro abaixo ocorreu: \n\n%s" % insert)
         
         QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.")
         self.close()
