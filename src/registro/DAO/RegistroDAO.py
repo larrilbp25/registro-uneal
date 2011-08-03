@@ -13,37 +13,34 @@ class RegistroDAO:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             create = u'''create table Registro 
-                    ( registro INTEGER,
+                    ( id INTEGER,
+                      registro INTEGER,
                       tipo INTEGER,
                       nome VARCHAR (100),
                       curso VARCHAR (50),
                       data_registro VARCHAR (10),
                       data_saida VARCHAR (10),
                       status INTEGER,
-                      observacoes VARCHAR (1000)
+                      observacoes VARCHAR (1000),
+                      PRIMARY KEY (id)
                     );
             '''
             cursor.execute(create)
             banco.commit()
             return True
-        except:
-            print 'a tabela ja foi criada'
+        except Exception, e:
+            return e
                 
     def insert(self, objeto):
         try:
-            print "objeto: ", objeto
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = u'''insert into Registro values ( %d, %d, %s, %s, %s, %s, %d, %s );''' % objeto['registro'], objeto['tipo'], objeto['nome'], objeto['curso'], objeto['data_registro'], objeto['data_saida'], objeto['status'], objeto['observacoes']
-            print "vou executar o Insert..."
+            insert = u'''insert into Registro (id, registro, tipo, nome, curso, data_registro, data_saida, status, observacoes) values (%d,%d,%d,"%s","%s","%s","%s",%d,"%s");''' % (objeto['id'], objeto['registro'], objeto['tipo'], objeto['nome'], objeto['curso'], objeto['data_registro'], objeto['data_saida'], objeto['status'], objeto['observacoes'],)
             cursor.execute(insert)
-            print "insert executado, vou commitar"
             banco.commit()
-            print "commit!"
             return True
         except Exception, e:
-            print e
-            return False
+            return e
     
     def update(self, object):
         try:
@@ -54,8 +51,8 @@ class RegistroDAO:
             cursor.execute(update)
             banco.commit()
             return True
-        except:
-            return False
+        except Exception, e:
+            return e
     
     def delete(self, object):
         try:
@@ -64,8 +61,8 @@ class RegistroDAO:
             delete = u'''delete from Registro where ("registro" = %d);''' % object['registro']
             cursor.execute(delete)
             banco.commit()
-        except:
-            return False
+        except Exception, e:
+            return e
         
     def select(self, object):
         try:
@@ -75,8 +72,8 @@ class RegistroDAO:
             cursor.execute(select)
             banco.commit()
             return cursor
-        except:
-            return False
+        except Exception, e:
+            return e
         
     def selectAll(self):
         try:
@@ -86,5 +83,5 @@ class RegistroDAO:
             cursor.execute(selectAll)
             resultados = cursor.fetchall()
             return resultados
-        except:
-            return False
+        except Exception, e:
+            return e
