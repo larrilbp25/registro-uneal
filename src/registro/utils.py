@@ -26,28 +26,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from utils import erroGtk
-    
-try:
-    from qt import QApplication
-except:
-    mensagem_erro = u'''Um erro de importação ocorreu, é provável que você não tenha o Qt ou o PyQt instalado. Para instalar, execute o seguinte comando:
-    
-    sudo apt-get install qt3-dev-tools pyqt-tools python-qt3'''
-    erroGtk(mensagem_erro)
-try:
-    import sqlite
-except:
-    mensagem_erro = u'''Um erro de importação ocorreu, é provável que você não tenha o sqlite instalado. Para instalar, execute o seguinte comando:
-    
-    sudo apt-get install sqlite'''
-    erroGtk(mensagem_erro)
-    
+import sys
+import gtk, pygtk
 
-from JanelaPrincipal import JanelaPrincipal
-
-if __name__=="__main__":
-    app = QApplication(sys.argv)
-    a = JanelaPrincipal()
-    a.show()
-    app.exec_loop()
+def erroGtk(texto, janela= None) :
+    dialogo= gtk.MessageDialog(janela, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, texto)
+    dialogo.set_markup(texto)
+    dialogo.run()
+    dialogo.destroy()
