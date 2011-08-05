@@ -46,8 +46,8 @@ class RegistroDAO:
                       tipo INTEGER,
                       nome VARCHAR (100),
                       curso VARCHAR (50),
-                      data_registro VARCHAR (10),
-                      data_saida VARCHAR (10),
+                      data_registro DATE,
+                      data_saida DATE,
                       status INTEGER,
                       observacoes VARCHAR (1000),
                       PRIMARY KEY (id)
@@ -56,31 +56,38 @@ class RegistroDAO:
             cursor.execute(create)
             banco.commit()
             return True
-        except Exception, e:
-            return e
+        except:
+            pass
                 
     def insert(self, objeto):
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = u'''insert into Registro (id, registro, tipo, nome, curso, data_registro, data_saida, status, observacoes) values (%d,%d,%d,"%s","%s","%s","%s",%d,"%s");''' % (objeto['id'], objeto['registro'], objeto['tipo'], objeto['nome'], objeto['curso'], objeto['data_registro'], objeto['data_saida'], objeto['status'], objeto['observacoes'],)
+            insert = u'''insert into Registro (id, registro, tipo, nome, curso, data_registro, data_saida, status, observacoes) 
+                         values (%d,%d,%d,"%s","%s","%s","%s",%d,"%s");''' % ( objeto['id'], objeto['registro'], objeto['tipo'], 
+                                                                               objeto['nome'], objeto['curso'], objeto['data_registro'], 
+                                                                               objeto['data_saida'], objeto['status'], objeto['observacoes'],)
             cursor.execute(insert)
             banco.commit()
             return True
         except Exception, e:
-            return e
+            warning = QMessageBox.warning(None, "Database error", u"Erro de inserção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
     
     def update(self, object):
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            update = u'''update Registro set ( "tipo"=%d, "nome"=%s, "curso"=%s, "data_registro"=%s, "status"=%d, "observacoes"=%s ) where (registro = %d);''' % (
-                  object['tipo'], object['nome'], object['curso'], object['data_registro'], object['data_saida'], object['status'], object['observacoes'], object['registro'])
+            update = u'''update Registro 
+                         set ( "tipo"=%d, "nome"=%s, "curso"=%s, "data_registro"=%s, "status"=%d, "observacoes"=%s ) where (registro = %d);''' % (
+                         object['tipo'], object['nome'], object['curso'], object['data_registro'], object['data_saida'], object['status'], 
+                         object['observacoes'], object['registro'])
             cursor.execute(update)
             banco.commit()
             return True
         except Exception, e:
-            return e
+            warning = QMessageBox.warning(None, "Database error", u"Erro na atualização do banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
     
     def delete(self, object):
         try:
@@ -90,7 +97,8 @@ class RegistroDAO:
             cursor.execute(delete)
             banco.commit()
         except Exception, e:
-            return e
+            warning = QMessageBox.warning(None, "Database error", u"Erro de deleção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
         
     def select(self, object):
         try:
@@ -100,14 +108,19 @@ class RegistroDAO:
             cursor.execute(select)
             return cursor.fetchall()
         except Exception, e:
-            return e
+            warning = QMessageBox.warning(None, "Database error", u"Erro de seleção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
         
     def selectAll(self):
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            selectAll = u"select * from Registro"
+            selectAll = u"select * from Registro;"
             cursor.execute(selectAll)
             return cursor.fetchall()
         except Exception, e:
-            return e
+            warning = QMessageBox.warning(None, "Database error", u"Erro de seleção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
+
+    def getNewID(self):
+        return len(self.selectAll()) + 1

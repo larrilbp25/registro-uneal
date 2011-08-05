@@ -225,7 +225,7 @@ class JanelaNovoRegistro(QWidget):
         
         registro_dao = RegistroDAO()
         
-        dict['id'] = len(registro_dao.selectAll()) + 1
+        dict['id'] = registro_dao.getNewID()
         
         dict['registro'] = self.spinbox_registro.value()
         
@@ -262,12 +262,9 @@ class JanelaNovoRegistro(QWidget):
         
         dict['observacoes'] = str(self.textEdit_observacoes.text())
         
-        insert = registro_dao.insert(dict)
-        if insert != True:
-            return QMessageBox.warning(None, "Erro", "O erro abaixo ocorreu: \n\n%s" % insert)
-        
-        QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.")
-        self.close()
+        if registro_dao.insert(dict) == True:
+            QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.")
+            return self.close()
         
     def update(self):
         print "JanelaNovoRegistro.salvar(): Not implemented yet"
