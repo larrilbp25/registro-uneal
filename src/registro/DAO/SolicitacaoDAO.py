@@ -25,7 +25,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import sqlite3
+import sqlite
 from qt import QMessageBox
 
 class SolicitacaoDAO:
@@ -40,13 +40,13 @@ class SolicitacaoDAO:
     
     def create(self):
         try:
-            banco = sqlite3.connect('database/banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            create = '''create table Solicitacao 
+            create = u'''create table Solicitacao 
                     ( id INTEGER PRIMARY KEY,
                       nome VARCHAR (100),
                       curso VARCHAR (50),
-                      data VARCHAR (10),
+                      data DATE,
                       certidao BOOLEAN,
                       declaracao BOOLEAN,
                       diploma BOOLEAN,
@@ -60,57 +60,71 @@ class SolicitacaoDAO:
             banco.commit()
             return True
         except:
-            warning = QMessageBox.warning(None, "Database error", "Erro na criação da tabela Solicitação, talvez ela já tenha sido criada.", QMessageBox.Yes)
-            return warning
+            pass
                 
-    def insert(self, object):
+    def insert(self, objeto):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = '''insert into Solicitacao values ( %d, %s, %s, %s, %b, %b, %b, %b, %b, %b, %s );''' % (
-                 object['id'], object['nome'], object['curso'], object['data'], object['certidao'], object['declaracao'],
-                 object['diploma'], object['historico'], object['outros'], object['urgencia'], object['observacoes'])
+            insert = u'''insert into Solicitacao (id, nome, curso, data, certidao, declaracao, diploma, historico, outros, urgencia, observacoes)
+                         values ( %d, "%s", "%s", "%s", %b, %b, %b, %b, %b, %b, "%s" );''' % (
+                         objeto['id'], objeto['nome'], objeto['curso'], objeto['data'], objeto['certidao'], objeto['declaracao'],
+                         objeto['diploma'], objeto['historico'], objeto['outros'], objeto['urgencia'], objeto['observacoes'],)
             cursor.execute(insert)
             banco.commit()
             return True
-        except:
-            warning = QMessageBox.warning(None, "Database error", "Erro de inserção no banco de dados.", QMessageBox.Yes)
-            return warning
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", u"Erro de inserção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
     
-    def update(self, object):
+    def update(self, objeto):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            update = '''update Solicitacao set ( "id"=%d, "nome"=%s, "curso"=%s, "data"=%s, "certidao"=%b, "declaracao"=%b, 
-                        "diploma"=%b, "historico"=%b, "outros"=%b, "urgencia"=%b, "observacoes"=%s ) where (registro = %d);''' % (
-                    object['id'], object['nome'], object['curso'], object['data'], object['certidao'], object['declaracao'], 
-                    object['diploma'], object['historico'], object['outros'], object['urgencia'], object['observacoes'])
+            update = u'''update Solicitacao set ( "id"=%d, "nome"="%s", "curso"="%s", "data"="%s", "certidao"=%b, "declaracao"=%b, 
+                        "diploma"=%b, "historico"=%b, "outros"=%b, "urgencia"=%b, "observacoes"="%s" ) where (registro = %d);''' % (
+                        objeto['id'], objeto['nome'], objeto['curso'], objeto['data'], objeto['certidao'], objeto['declaracao'], 
+                        objeto['diploma'], objeto['historico'], objeto['outros'], objeto['urgencia'], objeto['observacoes'],)
             cursor.execute(update)
             banco.commit()
             return True
-        except:
-            warning = QMessageBox.warning(None, "Database error", "Erro de atualização no banco de dados.", QMessageBox.Yes)
-            return warning
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro de atualização no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
     
-    def delete(self, object):
+    def delete(self, objeto):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            delete = '''delete from Solicitacao where ("registro" = %d);''' % object['id']
+            delete = u'''delete from Solicitacao 
+                         where ("registro" = %d);''' % objeto['id']
             cursor.execute(delete)
             banco.commit()
-        except:
-            warning = QMessageBox.warning(None, "Database error", "Erro ao remover do banco de dados.", QMessageBox.Yes)
-            return warning
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro ao remover do banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
         
-    def select(self, object):
+    def select(self, objeto):
         try:
             banco = sqlite3.connect('banco.db')
             cursor = banco.cursor()
-            delete = '''select * from Solicitacao where ("registro" = %d)''' % object['id']
+            delete = u'''select * from Solicitacao where ("registro" = %d);''' % objeto['id']
             cursor.execute(delete)
-            banco.commit()
-            return True
-        except:
-            warning = QMessageBox.warning(None, "Database error", "Erro da consulta no banco de dados.", QMessageBox.Yes)
-            return warning
+            return cursos.fetchall()
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro da consulta no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
+
+    def selectAll(self):
+        try:
+            banco = sqlite.connect('banco.db')
+            cursor = banco.cursor()
+            selectAll = u'''select * from Solicitacao;'''
+            cursor.execute(selectAll)
+            return cursor.fetchall()
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro da consulta no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
+
+    def getNewID(self):
+        return len(self.selectAll()) + 1
