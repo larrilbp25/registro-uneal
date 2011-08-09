@@ -43,7 +43,7 @@ except:
     sudo apt-get install sqlite'''
     erroGtk(mensagem_erro)
     
-
+import sys
 from JanelaPrincipal import JanelaPrincipal
 
 if __name__=="__main__":
