@@ -107,7 +107,7 @@ class JanelaNovaSolicitacao(QWidget):
     
     def limpar_campos(self):
         for item in self.lineEdit_nome, self.textEdit_observacoes:
-            item.setText("")
+            item.clear()
         for item in self.checkBox_certidao, self.checkBox_declaracao, self.checkBox_diploma, self.checkBox_historico, self.checkBox_outros, self.checkBox_urgencia:
             item.setChecked(False)
         for item in self.dateEdit_data:

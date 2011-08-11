@@ -25,7 +25,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import sqlite3
+import sqlite
 from qt import QMessageBox
 
 class UserDAO:
@@ -40,7 +40,7 @@ class UserDAO:
     
     def create(self):
         try:
-            banco = sqlite3.connect('database/banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
             create = '''create table User 
                     ( cpf INTEGER NOT NULL PRIMARY KEY,
@@ -56,50 +56,66 @@ class UserDAO:
             banco.commit()
             return True
         except:
-            warning = QMessageBox.warning(None, "Database error", "Erro na criação da tabela Registro, talvez ela já tenha sido criada.", QMessageBox.Yes)
-            return warning
+            pass
                 
     def insert(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = '''insert into User values ( %d, %s, %s, %s, %s, %b, %b );''' % (
+            insert = '''insert into User (cpf, nome, email, login, senha, autenticacao, admin) values ( %d, %s, %s, %s, %s, %b, %b );''' % (
                   object['cpf'], object['nome'], object['email'], object['login'], object['senha'], object['autenticacao'], object['admin'])
             cursor.execute(insert)
             banco.commit()
             return True
-        except:
-            return False
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", u"Erro de inserção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
     
     def update(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            update = '''update User set ( "nome"=%s, "email"=%s, "login"=%s, "senha"=%s, "autenticacao"=%b, "admin"=%b ) where (cpf = %d);''' % (
+            update = '''update User set ( "nome"="%s", "email"="%s", "login"="%s", "senha"="%s", "autenticacao"=%b, "admin"=%b ) where (cpf = %d);''' % (
                   object['cpf'], object['nome'], object['email'], object['login'], object['senha'], object['autenticacao'], object['admin'])
             cursor.execute(update)
             banco.commit()
             return True
-        except:
-            return False
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro de atualização no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
     
     def delete(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            delete = '''delete from User where ("cpf" = %d);''' % object['cpf']
+            delete = '''delete from User 
+                        where ("cpf" = %d);''' % object['cpf']
             cursor.execute(delete)
             banco.commit()
-        except:
-            return False
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro ao remover do banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
         
     def select(self, object):
         try:
-            banco = sqlite3.connect('banco.db')
+            banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            delete = '''select * from User where ("cpf" = %d)''' % object['cpf']
+            delete = '''select * 
+                        from User 
+                        where ("cpf" = %d)''' % object['cpf']
             cursor.execute(delete)
-            banco.commit()
-            return True
-        except:
-            return False
+            return cursor.fetchall()
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro da consulta no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
+
+    def selectAll(self):
+        try:
+            banco = sqlite.connect('banco.db')
+            cursor = banco.cursor()
+            selectAll = u'''select * from User;'''
+            cursor.execute(selectAll)
+            return cursor.fetchall()
+        except Exception, e:
+            warning = QMessageBox.warning(None, "Database error", "Erro da consulta no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
+            return ~warning
