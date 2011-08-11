@@ -194,9 +194,8 @@ class JanelaNovoRegistro(QWidget):
     def limpar_campos(self):
         for item in self.radio_diploma, self.radio_certificado, self.radio_status1, self.radio_status2, self.radio_status3, self.radio_status4:
             item.setChecked(False)
-        self.lineEdit_nome.setText("")
-        self.textEdit_observacoes.setText("")
-        self.comboBox_curso.clear()
+        for item in self.lineEdit_nome, self.textEdit_observacoes, self.comboBox_curso:
+            item.clear()
         for item in self.dateEdit_data_registro, self.dateEdit_data_saida:
             pass
     

@@ -1,0 +1,305 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>JanelaNovaSolicitacao</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>JanelaNovaSolicitacao</cstring>
+    </property>
+    <property name="enabled">
+        <bool>true</bool>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>492</width>
+            <height>298</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Cadastro de Usuário</string>
+    </property>
+    <property name="mouseTracking">
+        <bool>false</bool>
+    </property>
+    <property name="acceptDrops">
+        <bool>false</bool>
+    </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_cpf</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>20</y>
+                <width>149</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>CPF (somente numeros)</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_nome</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>60</y>
+                <width>149</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Nome</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_email</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>100</y>
+                <width>149</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Email</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_login</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>140</y>
+                <width>149</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Login</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_senha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>180</y>
+                <width>149</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Senha</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>label_repetir_senha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>220</y>
+                <width>149</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Repetir a senha</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_cpf</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>20</y>
+                <width>290</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_email</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>100</y>
+                <width>290</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_login</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>140</y>
+                <width>290</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_senha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>180</y>
+                <width>290</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_salvar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>260</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Salvar</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_cancelar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>380</x>
+                <y>260</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Cancelar</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_limpar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>280</x>
+                <y>260</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Limpar</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_nome</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>60</y>
+                <width>290</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>lineEdit_repetir_senha</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>180</x>
+                <y>220</y>
+                <width>290</width>
+                <height>22</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+            </font>
+        </property>
+        <property name="text">
+            <string></string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>botao_cancelar</sender>
+        <signal>clicked()</signal>
+        <receiver>JanelaNovaSolicitacao</receiver>
+        <slot>close()</slot>
+    </connection>
+    <connection>
+        <sender>botao_limpar</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit_cpf</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>botao_limpar</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit_email</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>botao_limpar</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit_login</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>botao_limpar</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit_nome</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>botao_limpar</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit_repetir_senha</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>botao_limpar</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit_senha</receiver>
+        <slot>clear()</slot>
+    </connection>
+</connections>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>
