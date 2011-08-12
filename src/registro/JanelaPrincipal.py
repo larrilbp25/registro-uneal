@@ -29,6 +29,7 @@ from qt import *
 from imagens import *
 from JanelaNovoRegistro import JanelaNovoRegistro
 from JanelaNovaSolicitacao import JanelaNovaSolicitacao
+from JanelaCadastroUsuario import JanelaCadastroUsuario
 from JanelaSobre import JanelaSobre
 
 class JanelaPrincipal(QMainWindow):
@@ -121,7 +122,7 @@ class JanelaPrincipal(QMainWindow):
 
         self.connect(self.arquivoNovoRegistroAction,SIGNAL("activated()"),self.arquivoNovoRegistro)
         self.connect(self.arquivoNovoSolicitacaoAction,SIGNAL("activated()"),self.arquivoNovoSolicitacao)
-        self.connect(self.arquivoNovoUsuarioAction,SIGNAL("activated()"),self.novoUsuario)
+        self.connect(self.arquivoNovoUsuarioAction,SIGNAL("activated()"),self.arquivoNovoUsuario)
         self.connect(self.arquivoSairAction,SIGNAL("activated()"),self.close)
         self.connect(self.editarDesfazerAction,SIGNAL("activated()"),self.editarDesfazer)
         self.connect(self.editarRefazerAction,SIGNAL("activated()"),self.editarRefazer)
@@ -188,8 +189,9 @@ class JanelaPrincipal(QMainWindow):
         self.novo = JanelaNovaSolicitacao()
         self.novo.show()
 
-    def novoUsuario(self):
-        print "JanelaPrincipal.novoUsuario(): Not implemented yet"
+    def arquivoNovoUsuario(self):
+        self.novo = JanelaCadastroUsuario()
+        self.novo.show()
 
     def editarDesfazer(self):
         print "JanelaPrincipal.editarDesfazer(): Not implemented yet"
