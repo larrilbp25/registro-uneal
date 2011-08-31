@@ -62,12 +62,13 @@ class UserDAO:
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = '''insert into User (cpf, nome, email, login, senha, autenticacao, admin) values ( %d, %s, %s, %s, %s, %b, %b );''' % (
+            insert = '''insert into User (cpf, nome, email, login, senha, autenticacao, admin) values ( %d, %s, %s, %s, %s, %d, %d );''' % (
                   object['cpf'], object['nome'], object['email'], object['login'], object['senha'], object['autenticacao'], object['admin'])
             cursor.execute(insert)
             banco.commit()
             return True
         except Exception, e:
+            print e
             warning = QMessageBox.warning(None, "Database error", u"Erro de inserção no banco de dados. O erro foi:\n\n%s" % e, QMessageBox.Ok)
             return ~warning
     
@@ -75,7 +76,7 @@ class UserDAO:
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            update = '''update User set ( "nome"="%s", "email"="%s", "login"="%s", "senha"="%s", "autenticacao"=%b, "admin"=%b ) where (cpf = %d);''' % (
+            update = '''update User set ( "nome"="%s", "email"="%s", "login"="%s", "senha"="%s", "autenticacao"=%d, "admin"=%d ) where (cpf = %d);''' % (
                   object['cpf'], object['nome'], object['email'], object['login'], object['senha'], object['autenticacao'], object['admin'])
             cursor.execute(update)
             banco.commit()

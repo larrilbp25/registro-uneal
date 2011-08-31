@@ -1,4 +1,4 @@
-#Wed Aug 10 21:09:00 BRT 2011
+#Sun Aug 14 09:31:39 BRT 2011
 eclipse.preferences.version=1
 encoding//src/registro/DAO/RegistroDAO.py=utf-8
 encoding//src/registro/DAO/SolicitacaoDAO.py=utf-8
@@ -11,3 +11,4 @@ encoding//src/registro/JanelaPrincipal.py=utf-8
 encoding//src/registro/JanelaSobre.py=utf-8
 encoding//src/registro/RegistroApplication.py=utf-8
 encoding//src/registro/imagens.py=utf-8
+encoding//src/registro/utils.py=utf-8

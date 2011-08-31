@@ -34,3 +34,12 @@ def erroGtk(texto, janela= None) :
     dialogo.set_markup(texto)
     dialogo.run()
     dialogo.destroy()
+
+def is_numeric_digit(digito):
+    try:
+        for inteiro in range(10):
+            if int(digito) == inteiro:
+                return True
+        return False
+    except ValueError:
+        return False
