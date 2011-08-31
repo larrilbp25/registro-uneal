@@ -29,8 +29,8 @@ from qt import *
 from imagens import *
 from JanelaNovoRegistro import JanelaNovoRegistro
 from JanelaNovaSolicitacao import JanelaNovaSolicitacao
-from JanelaCadastroUsuario import JanelaCadastroUsuario
 from JanelaSobre import JanelaSobre
+from JanelaCadastroUsuario import JanelaCadastroUsuario
 
 class JanelaPrincipal(QMainWindow):
     def __init__(self,parent = None,name = None,fl = 0):

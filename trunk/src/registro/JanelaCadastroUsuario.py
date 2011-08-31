@@ -26,6 +26,8 @@
 '''
 
 from qt import *
+from DAO.UserDAO import UserDAO
+from utils import is_numeric_digit
 
 
 class JanelaCadastroUsuario(QWidget):
@@ -84,8 +86,18 @@ class JanelaCadastroUsuario(QWidget):
         self.lineEdit_nome.setGeometry(QRect(180,60,290,22))
 
         self.lineEdit_repetir_senha = QLineEdit(self,"lineEdit_repetir_senha")
+        self.lineEdit_repetir_senha.setEnabled(1)
         self.lineEdit_repetir_senha.setGeometry(QRect(180,220,290,22))
         self.lineEdit_repetir_senha.setEchoMode(2)
+        
+        self.setTabOrder(self.lineEdit_cpf, self.lineEdit_nome)
+        self.setTabOrder(self.lineEdit_nome, self.lineEdit_email)
+        self.setTabOrder(self.lineEdit_email, self.lineEdit_login)
+        self.setTabOrder(self.lineEdit_login, self.lineEdit_senha)
+        self.setTabOrder(self.lineEdit_senha, self.lineEdit_repetir_senha)
+        self.setTabOrder(self.lineEdit_repetir_senha, self.botao_salvar)
+        self.setTabOrder(self.botao_salvar, self.botao_limpar)
+        self.setTabOrder(self.botao_limpar, self.botao_cancelar)
         
         self.languageChange()
 
@@ -95,7 +107,40 @@ class JanelaCadastroUsuario(QWidget):
         self.connect(self.botao_salvar,SIGNAL("clicked()"),self.salvar)
         self.connect(self.botao_cancelar,SIGNAL("clicked()"),self.close)
         self.connect(self.botao_limpar,SIGNAL("clicked()"),self.limpar_campos)
+        
+    def salvar(self):
+        for item in self.lineEdit_cpf, self.lineEdit_email, self.lineEdit_login, self.lineEdit_nome, self.lineEdit_repetir_senha, self.lineEdit_senha:
+            if len(item.text()) == 0:
+                return QMessageBox.warning(None, "Atenção", u"Verifique se todos os campos foram preenchidos corretamente.")#"Falta preencher o campo \"%s\"!" % item.accessibleName())
+        
+        for letra in self.lineEdit_cpf.text():
+            if not is_numeric_digit(letra):
+                return QMessageBox.warning(None, "Atenção", u"Digite apenas números no campo CPF")
+        
+        if self.lineEdit_senha.text() != self.lineEdit_repetir_senha.text():
+            return QMessageBox.critical(None, "Erro", u"As senhas digitadas não são idênticas. Tente novamente.")
+        
+        dict = {}
+        dict['cpf'] = int(self.lineEdit_cpf.text())
+        dict['nome'] = self.__trUtf8(self.lineEdit_nome.text())
+        dict['email'] = self.__trUtf8(self.lineEdit_email.text())
+        dict['login'] = self.__trUtf8(self.lineEdit_login.text())
+        dict['senha'] = self.__trUtf8(self.lineEdit_senha.text())
+        dict['autenticacao'] = 0 # 0 to false, 1 to true
+        dict['admin'] = 0 # 0 to false, 1 to true
+        
+        user_dao = UserDAO()
+        
+        if user_dao.insert(dict) == True:
+            QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.")
+            return self.close()
 
+        '''@todo: terminar o insert do CRUD
+        '''
+
+    def limpar_campos(self):
+        for item in self.lineEdit_cpf, self.lineEdit_email, self.lineEdit_login, self.lineEdit_nome, self.lineEdit_repetir_senha, self.lineEdit_senha:
+            item.clear()
 
     def languageChange(self):
         self.setCaption(self.__trUtf8(u"Cadastro de Usuário"))
@@ -109,16 +154,6 @@ class JanelaCadastroUsuario(QWidget):
         self.botao_cancelar.setText(self.__tr("Cancelar"))
         self.botao_limpar.setText(self.__tr("Limpar"))
         self.lineEdit_repetir_senha.setText(QString.null)
-
-    def salvar(self):
-        for item in self.lineEdit_cpf, self.lineEdit_email, self.lineEdit_login, self.lineEdit_nome, self.lineEdit_repetir_senha, self.lineEdit_senha:
-            if len(item.text())==0:
-                print item.text(), u' não preenchido' # pegar o nome de batismo da variavel ?????????????????????????
-                return
-
-    def limpar_campos(self):
-        for item in self.lineEdit_cpf, self.lineEdit_email, self.lineEdit_login, self.lineEdit_nome, self.lineEdit_repetir_senha, self.lineEdit_senha:
-            item.clear()
 
     def __tr(self,s,c = None):
         return qApp.translate("JanelaCadastroUsuario",s,c)
