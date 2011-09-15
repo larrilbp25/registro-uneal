@@ -27,6 +27,7 @@
 
 import sqlite
 from qt import QMessageBox
+from CreateDB import CreateDB
 
 class RegistroDAO:
     ''' métodos para inserção, seleção, modificação e deleção de
@@ -34,30 +35,30 @@ class RegistroDAO:
     '''
     
     def __init__(self):
-        self.create()
+        create = CreateDB()
     
-    def create(self):
-        try:
-            banco = sqlite.connect('banco.db')
-            cursor = banco.cursor()
-            create = u'''create table Registro 
-                    ( id INTEGER,
-                      registro INTEGER,
-                      tipo INTEGER,
-                      nome VARCHAR (100),
-                      curso VARCHAR (50),
-                      data_registro DATE,
-                      data_saida DATE,
-                      status INTEGER,
-                      observacoes VARCHAR (1000),
-                      PRIMARY KEY (id)
-                    );
-            '''
-            cursor.execute(create)
-            banco.commit()
-            return True
-        except:
-            pass
+#    def create(self):
+#        try:
+#            banco = sqlite.connect('banco.db')
+#            cursor = banco.cursor()
+#            create = u'''create table Registro 
+#                    ( id INTEGER,
+#                      registro INTEGER,
+#                      tipo INTEGER,
+#                      nome VARCHAR (100),
+#                      curso VARCHAR (50),
+#                      data_registro DATE,
+#                      data_saida DATE,
+#                      status INTEGER,
+#                      observacoes VARCHAR (1000),
+#                      PRIMARY KEY (id)
+#                    );
+#            '''
+#            cursor.execute(create)
+#            banco.commit()
+#            return True
+#        except:
+#            pass
                 
     def insert(self, objeto):
         try:

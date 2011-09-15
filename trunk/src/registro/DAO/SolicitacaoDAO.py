@@ -27,6 +27,7 @@
 
 import sqlite
 from qt import QMessageBox
+from CreateDB import CreateDB
 
 class SolicitacaoDAO:
     ''' métodos para inserção, seleção, modificação e deleção de
@@ -36,31 +37,31 @@ class SolicitacaoDAO:
     '''
     
     def __init__(self):
-        self.create()
+        create = CreateDB()
     
-    def create(self):
-        try:
-            banco = sqlite.connect('banco.db')
-            cursor = banco.cursor()
-            create = u'''create table Solicitacao 
-                    ( id INTEGER PRIMARY KEY,
-                      nome VARCHAR (100),
-                      curso VARCHAR (50),
-                      data DATE,
-                      certidao BOOLEAN,
-                      declaracao BOOLEAN,
-                      diploma BOOLEAN,
-                      historico BOOLEAN,
-                      outros BOOLEAN,
-                      urgencia BOOLEAN,
-                      observacoes VARCHAR (1000)
-                    );
-            '''
-            cursor.execute(create)
-            banco.commit()
-            return True
-        except:
-            pass
+#    def create(self):
+#        try:
+#            banco = sqlite.connect('banco.db')
+#            cursor = banco.cursor()
+#            create = u'''create table Solicitacao 
+#                    ( id INTEGER PRIMARY KEY,
+#                      nome VARCHAR (100),
+#                      curso VARCHAR (50),
+#                      data DATE,
+#                      certidao BOOLEAN,
+#                      declaracao BOOLEAN,
+#                      diploma BOOLEAN,
+#                      historico BOOLEAN,
+#                      outros BOOLEAN,
+#                      urgencia BOOLEAN,
+#                      observacoes VARCHAR (1000)
+#                    );
+#            '''
+#            cursor.execute(create)
+#            banco.commit()
+#            return True
+#        except:
+#            pass
                 
     def insert(self, objeto):
         try:
