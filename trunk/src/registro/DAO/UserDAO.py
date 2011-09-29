@@ -37,7 +37,8 @@ class UserDAO:
     '''
     
     def __init__(self):
-        create = CreateDB()
+        #create = CreateDB()
+        pass
     
 #    def create(self):
 #        try:
@@ -63,8 +64,12 @@ class UserDAO:
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = '''insert into User (cpf, nome, email, login, senha, autenticacao, admin) values ( %d, %s, %s, %s, %s, %d, %d );''' % (
-                  object['cpf'], object['nome'], object['email'], object['login'], object['senha'], object['autenticacao'], object['admin'])
+            insert = '''insert into User 
+            ('cpf', 'nome', 'email', 'login', 'senha', 'autenticacao', 'admin') 
+            values ( '%d', '%s', '%s', '%s', '%s', '%d', '%d' );''' % (
+                  object['cpf'], object['nome'], object['email'], 
+                  object['login'], object['senha'], 
+                  object['autenticacao'], object['admin'])
             cursor.execute(insert)
             banco.commit()
             return True

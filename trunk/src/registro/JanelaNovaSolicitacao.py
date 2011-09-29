@@ -26,6 +26,8 @@
 '''
 
 from qt import *
+from DAO.SolicitacaoDAO import SolicitacaoDAO
+from JanelaNovoRegistro import LISTA_GRADUACAO
 
 class JanelaNovaSolicitacao(QWidget):
     def __init__(self,parent = None,name = None,fl = 0):
@@ -103,6 +105,46 @@ class JanelaNovaSolicitacao(QWidget):
 
 
     def salvar(self):
+        dict = {}
+        
+        registro_dao = SolicitacaoDAO()
+        
+        dict['id'] = registro_dao.getNewID()
+        
+        if len(self.lineEdit_nome.text()) != 0:
+            dict['nome'] = str(self.lineEdit_nome.text())
+        else:
+            return QMessageBox.warning(None, "Oops", u"Você esqueceu de digitar o nome do aluno.")
+        
+        dict['curso'] = LISTA_GRADUACAO[self.comboBox_curso.currentItem()]
+        
+        date = self.dateEdit_data.date()
+        dict['data'] = str(date.year()) + '-' + str(date.month()) + '-' + str(date.day())
+
+        if self.checkBox_certidao.isChecked(): dict['certidao'] = 1
+        else: dict['certidao'] = 0
+
+        if self.checkBox_declaracao.isChecked(): dict['declaracao'] = 1
+        else: dict['declaracao'] = 0
+
+        if self.checkBox_diploma.isChecked(): dict['diploma'] = 1
+        else: dict['diploma'] = 0
+
+        if self.checkBox_historico.isChecked(): dict['historico'] = 1
+        else: dict['historico'] = 0
+
+        if self.checkBox_outros.isChecked(): dict['outros'] = 1
+        else: dict['outros'] = 0
+
+        if self.checkBox_urgencia.isChecked(): dict['urgencia'] = 1
+        else: dict['urgencia'] = 0
+        
+        dict['observacoes'] = self.textEdit_observacoes.text()
+        
+        if registro_dao.insert(dict) == True:
+            QMessageBox.information(None, "Salvo", "Dados salvos com sucesso.")
+            return self.close()
+        
         print "JanelaNovaSolicitacao.salvar(): Not implemented yet"
     
     def limpar_campos(self):
@@ -118,15 +160,8 @@ class JanelaNovaSolicitacao(QWidget):
         self.setCaption(self.__trUtf8("Nova solicitação"))
         self.label_nome.setText(self.__tr("Nome"))
         self.comboBox_curso.clear()
-        self.comboBox_curso.insertItem(self.__trUtf8("Ciências"))
-        self.comboBox_curso.insertItem(self.__trUtf8("Ciências Biológicas"))
-        self.comboBox_curso.insertItem(self.__tr("Geografia"))
-        self.comboBox_curso.insertItem(self.__trUtf8("História"))
-        self.comboBox_curso.insertItem(self.__tr("Letras"))
-        self.comboBox_curso.insertItem(self.__trUtf8("Matemática"))
-        self.comboBox_curso.insertItem(self.__tr("Pedagogia"))
-        self.comboBox_curso.insertItem(self.__trUtf8("Química"))
-        self.comboBox_curso.insertItem(self.__tr("Outro"))
+        for item in LISTA_GRADUACAO:
+            self.comboBox_curso.insertItem(self.__trUtf8(item))
         self.label_curso.setText(self.__tr("Curso"))
         self.label_data.setText(self.__tr("Data"))
         self.label_solicitacao.setText(self.__trUtf8("Solicitação"))

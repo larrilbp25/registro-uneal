@@ -41,7 +41,8 @@ class CreateDB:
         try:
             self.banco = sqlite.connect('banco.db')
             self.cursor = banco.cursor()
-            self.solicitacao = u'''create table Solicitacao 
+            self.tabelas = u'''
+                create table Solicitacao 
                     ( id INTEGER PRIMARY KEY,
                       nome VARCHAR (100),
                       curso VARCHAR (50),
@@ -54,13 +55,8 @@ class CreateDB:
                       urgencia BOOLEAN,
                       observacoes VARCHAR (1000)
                     );
-            '''
-            self.cursor.execute(self.solicitacao)
-            #banco.commit()
-            
-            #banco = sqlite.connect('banco.db')
-            #cursor = banco.cursor()
-            self.user = '''create table User 
+                    
+                create table User 
                     ( cpf INTEGER NOT NULL PRIMARY KEY,
                       nome VARCHAR (100),
                       email VARCHAR (50),
@@ -69,13 +65,8 @@ class CreateDB:
                       autenticacao BOOLEAN,
                       admin BOOLEAN
                     );
-            '''
-            self.cursor.execute(self.user)
-            #banco.commit()
-            
-            #banco = sqlite.connect('banco.db')
-            #cursor = banco.cursor()
-            self.registro = u'''create table Registro 
+                    
+                create table Registro 
                     ( id INTEGER,
                       registro INTEGER,
                       tipo INTEGER,
@@ -88,7 +79,8 @@ class CreateDB:
                       PRIMARY KEY (id)
                     );
             '''
-            self.cursor.execute(self.registro)
+            self.cursor.execute(self.tabelas)
+            
             self.banco.commit()
             
             return True

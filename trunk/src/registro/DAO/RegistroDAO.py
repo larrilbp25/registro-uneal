@@ -35,7 +35,8 @@ class RegistroDAO:
     '''
     
     def __init__(self):
-        create = CreateDB()
+        #create = CreateDB()
+        pass
     
 #    def create(self):
 #        try:

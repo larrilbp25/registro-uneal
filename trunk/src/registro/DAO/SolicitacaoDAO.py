@@ -37,7 +37,8 @@ class SolicitacaoDAO:
     '''
     
     def __init__(self):
-        create = CreateDB()
+        #create = CreateDB()
+        pass
     
 #    def create(self):
 #        try:
@@ -67,10 +68,16 @@ class SolicitacaoDAO:
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            insert = u'''insert into Solicitacao (id, nome, curso, data, certidao, declaracao, diploma, historico, outros, urgencia, observacoes)
-                         values ( %d, "%s", "%s", "%s", %b, %b, %b, %b, %b, %b, "%s" );''' % (
-                         objeto['id'], objeto['nome'], objeto['curso'], objeto['data'], objeto['certidao'], objeto['declaracao'],
-                         objeto['diploma'], objeto['historico'], objeto['outros'], objeto['urgencia'], objeto['observacoes'],)
+            insert = u'''insert into Solicitacao 
+                        (id, nome, curso, data, certidao, 
+                         declaracao, diploma, historico, outros, 
+                         urgencia, observacoes)
+                         values 
+                         ( %d, "%s", "%s", "%s", %d, %d, %d, %d, %d, %d, "%s" );''' % (
+                         objeto['id'], objeto['nome'], objeto['curso'], 
+                         objeto['data'], objeto['certidao'], objeto['declaracao'],
+                         objeto['diploma'], objeto['historico'], objeto['outros'], 
+                         objeto['urgencia'], objeto['observacoes'],)
             cursor.execute(insert)
             banco.commit()
             return True
@@ -82,8 +89,8 @@ class SolicitacaoDAO:
         try:
             banco = sqlite.connect('banco.db')
             cursor = banco.cursor()
-            update = u'''update Solicitacao set ( "id"=%d, "nome"="%s", "curso"="%s", "data"="%s", "certidao"=%b, "declaracao"=%b, 
-                        "diploma"=%b, "historico"=%b, "outros"=%b, "urgencia"=%b, "observacoes"="%s" ) where (registro = %d);''' % (
+            update = u'''update Solicitacao set ( "id"=%d, "nome"="%s", "curso"="%s", "data"="%s", "certidao"=%d, "declaracao"=%d, 
+                        "diploma"=%d, "historico"=%d, "outros"=%d, "urgencia"=%d, "observacoes"="%s" ) where (registro = %d);''' % (
                         objeto['id'], objeto['nome'], objeto['curso'], objeto['data'], objeto['certidao'], objeto['declaracao'], 
                         objeto['diploma'], objeto['historico'], objeto['outros'], objeto['urgencia'], objeto['observacoes'],)
             cursor.execute(update)
