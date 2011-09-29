@@ -139,6 +139,7 @@ class JanelaNovoRegistro(QWidget):
         # se houver argumentos (usar no formulário de edição)
         if args:
             self.editar_form(*args)
+            edit = True
 
 
     def languageChange(self):
