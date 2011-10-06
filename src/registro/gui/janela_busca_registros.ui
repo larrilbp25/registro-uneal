@@ -15,39 +15,18 @@
     <property name="caption">
         <string>Busca de registros</string>
     </property>
-    <widget class="QPushButton">
-        <property name="name">
-            <cstring>botao_cancelar</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>440</x>
-                <y>350</y>
-                <width>90</width>
-                <height>24</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>Cancelar</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>textLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>15</y>
-                <width>297</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>Digite o nome do aluno e clique no botão buscar</string>
-        </property>
-    </widget>
     <widget class="QListView">
+        <column>
+            <property name="text">
+                <string>Registro</string>
+            </property>
+            <property name="clickable">
+                <bool>true</bool>
+            </property>
+            <property name="resizable">
+                <bool>true</bool>
+            </property>
+        </column>
         <column>
             <property name="text">
                 <string>Nome</string>
@@ -83,13 +62,45 @@
         </column>
     <item>
         <property name="text">
-            <string>Item</string>
+            <string>Item 1</string>
         </property>
         <property name="text">
             <string></string>
         </property>
         <property name="text">
             <string></string>
+        </property>
+        <property name="text">
+            <string></string>
+        </property>
+        <property name="pixmap">
+            <pixmap></pixmap>
+        </property>
+        <property name="pixmap">
+            <pixmap></pixmap>
+        </property>
+        <property name="pixmap">
+            <pixmap></pixmap>
+        </property>
+        <property name="pixmap">
+            <pixmap></pixmap>
+        </property>
+    </item>
+    <item>
+        <property name="text">
+            <string>Item 2</string>
+        </property>
+        <property name="text">
+            <string></string>
+        </property>
+        <property name="text">
+            <string></string>
+        </property>
+        <property name="text">
+            <string></string>
+        </property>
+        <property name="pixmap">
+            <pixmap></pixmap>
         </property>
         <property name="pixmap">
             <pixmap></pixmap>
@@ -109,40 +120,40 @@
                 <x>20</x>
                 <y>75</y>
                 <width>500</width>
-                <height>240</height>
+                <height>270</height>
             </rect>
         </property>
     </widget>
-    <widget class="QPushButton">
+    <widget class="QLabel">
         <property name="name">
-            <cstring>botao_limpar</cstring>
+            <cstring>textLabel1</cstring>
         </property>
         <property name="geometry">
             <rect>
-                <x>340</x>
-                <y>350</y>
-                <width>90</width>
-                <height>24</height>
+                <x>20</x>
+                <y>15</y>
+                <width>297</width>
+                <height>20</height>
             </rect>
         </property>
         <property name="text">
-            <string>Limpar</string>
+            <string>Digite o nome do aluno e clique no botão buscar</string>
         </property>
     </widget>
-    <widget class="QPushButton">
+    <widget class="QLabel">
         <property name="name">
-            <cstring>botao_buscar</cstring>
+            <cstring>textLabel1_2</cstring>
         </property>
         <property name="geometry">
             <rect>
-                <x>430</x>
-                <y>40</y>
-                <width>90</width>
-                <height>24</height>
+                <x>20</x>
+                <y>352</y>
+                <width>376</width>
+                <height>20</height>
             </rect>
         </property>
         <property name="text">
-            <string>Buscar</string>
+            <string>Para editar, selecione o item na lista e clique no botão ao lado</string>
         </property>
     </widget>
     <widget class="QLineEdit">
@@ -153,9 +164,57 @@
             <rect>
                 <x>20</x>
                 <y>40</y>
-                <width>400</width>
+                <width>300</width>
                 <height>24</height>
             </rect>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_editar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>430</x>
+                <y>350</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Editar</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_listar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>430</x>
+                <y>40</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Listar todos</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>botao_buscar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>330</x>
+                <y>40</y>
+                <width>90</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Buscar</string>
         </property>
     </widget>
 </widget>
