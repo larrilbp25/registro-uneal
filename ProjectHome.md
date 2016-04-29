@@ -1,0 +1,1 @@
+This project proposes a database tool to diploma, certified and another requests registration management for Academic Registration and Control (Core Sector) of State University of Alagoas on Campus Palmeira dos Indios.
